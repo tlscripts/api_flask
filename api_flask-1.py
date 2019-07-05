@@ -15,24 +15,9 @@ class User(db.Model):
     Gender= db.Column(db.String(100))
     Text1 = db.Column(db.String(500))
 
-# Base class to instantiate object with all fields, or to subclass
-class UserInfo:
-    
-    def get():
-        a = User.query
-        all_users = []
-        for item in a:
-            row = {}
-            row['id'] = item.id
-            row['first'] = item.First_name
-            row['last'] = item.Last_name
-            row['gender'] = item.Gender
-            row['text1'] = item.Text1
-            all_users.append(row)
-        return all_users
 
 # Our object to run queries against
-allusers = UserInfo.get()
+allusers = User.query
 
 @app.route('/<first>/<last>', methods=['GET'])
 def gets(first, last):
